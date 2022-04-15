@@ -1,9 +1,22 @@
 public class Svetofor {
-    public static boolean isGreenLight = false;
-    public static int MAX_SPEED = 10;
+    public boolean isGreenLight;
+    public int MAX_SPEED = 10;
+
+    public Svetofor(boolean isGreenLight) {
+        this.isGreenLight = isGreenLight;
+    }
+
+    public Svetofor(boolean isGreenLight, int MAX_SPEED) {
+        this.isGreenLight = isGreenLight;
+        if (MAX_SPEED < 0) {
+            MAX_SPEED = 1;
+        }
+        this.MAX_SPEED = MAX_SPEED;
+    }
+
 
     //Функция для опеределения того, что игрок выбыл или нет
-    public static boolean isPlayerWin(int speedOfPlayer) {
+    public boolean isPlayerWin(int speedOfPlayer) {
         boolean winOrNot;
         if (isGreenLight) winOrNot = true;
         else if (speedOfPlayer >= MAX_SPEED) winOrNot = false;
@@ -12,7 +25,7 @@ public class Svetofor {
     }
 
     //Функция для подсчёта числа выбывших игроков
-    public static int numberOfLosers(int[] playersSpeeds) {
+    public int numberOfLosers(int[] playersSpeeds) {
         int numOfLosers = 0;
 
         for (int i = 0; i < playersSpeeds.length; i++) {
@@ -25,7 +38,7 @@ public class Svetofor {
     }
 
     //Функция для заполнения массива скоростями выбывщих игроков
-    public static int[] speedsOfLoserPlayers(int[] playersSpeeds) {
+    public int[] speedsOfLoserPlayers(int[] playersSpeeds) {
         int[] speedsOfLoserPlayer = new int[numberOfLosers(playersSpeeds)]; //Создание массива для скоростей проигравших
         int arrayPosition = 0;                                              //через функцию подсчёта проигравших
 
@@ -40,7 +53,7 @@ public class Svetofor {
     }
 
     //Функция для заполнения массива скоростями победивших игроков
-    public static int[] speedsOfWinnerPlayers(int[] playersSpeeds) {
+    public int[] speedsOfWinnerPlayers(int[] playersSpeeds) {
         int[] speedsOfWinnerPlayers = new int[playersSpeeds.length - numberOfLosers(playersSpeeds)]; //Создание массива для скоростей проигравших
         int arrayPosition = 0;                                                               //по принципу [все скорости] - [допустимые скорости]
 
@@ -55,7 +68,7 @@ public class Svetofor {
     }
 
     //Функция для определения имён победителей
-    public static String[] winnerPlayerNames(String[] playersNamesWithSpeed) {
+    public String[] winnerPlayerNames(String[] playersNamesWithSpeed) {
         int winnerPlayerNamesArrayPosition = 0;
         String[] allPlayersNames = new String[playersNamesWithSpeed.length]; //Создание массива для всех имён
         int[] allPlayersSpeeds = new int[playersNamesWithSpeed.length]; //Создание массива для всех скоростей
@@ -67,7 +80,7 @@ public class Svetofor {
         }
 
         String[] winnerPlayerNames = new String[allPlayersSpeeds.length - numberOfLosers(allPlayersSpeeds)]; //Создание массива для имён победителй
-                                                                                            //по принципу: [все имена] - [имена проигравших]
+        //по принципу: [все имена] - [имена проигравших]
         for (int i = 0; i < allPlayersSpeeds.length; i++) {
             if (isPlayerWin(allPlayersSpeeds[i])) {                                         //проверка на выйгрыш
                 winnerPlayerNames[winnerPlayerNamesArrayPosition] = allPlayersNames[i];
@@ -78,17 +91,4 @@ public class Svetofor {
         return winnerPlayerNames;
     }
 
-    //Функция для вывода элементов числового массива
-    public static void printArrayInts(int[] arrayForPrint) {
-        for (int i = 0; i < arrayForPrint.length; i++) {
-            System.out.print(arrayForPrint[i] + " ");
-        }
-    }
-
-    //Функция для вывода элементов строкового массива
-    public static void printArrayStrings(String[] arrayForPrint) {
-        for (int i = 0; i < arrayForPrint.length; i++) {
-            System.out.print(arrayForPrint[i] + " ");
-        }
-    }
 }
