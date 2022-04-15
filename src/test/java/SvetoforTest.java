@@ -25,4 +25,12 @@ public class SvetoforTest {
         int[] actualSpeeds = Svetofor.speedsOfWinnerPlayers(playersSpeeds);
         Assertions.assertArrayEquals(expectedSpeeds, actualSpeeds);
     }
+
+    @Test
+    public void mustFindNamesOfWinners() {
+        String[] playersNamesWithSpeed = new String[]{"James 10", "Mya 9", "Maks 0", "Daniel 11", "Finn 4"};
+        String[] expectedNames = new String[]{"Mya", "Maks", "Finn"};
+        String[] actualNames = Svetofor.winnerPlayerNames(playersNamesWithSpeed);
+        Assertions.assertArrayEquals(expectedNames, actualNames);
+    }
 }
