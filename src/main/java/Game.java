@@ -1,25 +1,23 @@
-public class Svetofor {
-    public boolean isGreenLight;
-    public int MAX_SPEED = 10;
+public class Game {
+    private boolean isGreenLight;
 
-    public Svetofor(boolean isGreenLight) {
+    public Game(boolean isGreenLight) {
         this.isGreenLight = isGreenLight;
     }
 
-    public Svetofor(boolean isGreenLight, int MAX_SPEED) {
-        this.isGreenLight = isGreenLight;
-        if (MAX_SPEED < 0) {
-            MAX_SPEED = 1;
-        }
-        this.MAX_SPEED = MAX_SPEED;
+    public boolean getIsGreenLight() {
+        return isGreenLight;
     }
 
+    public void setIsGreenLight(boolean greenLight) {
+        isGreenLight = greenLight;
+    }
 
-    //Функция для опеределения того, что игрок выбыл или нет
+    //Функция для опеределения того, что игрок выбыл или нет с учётом светофора
     public boolean isPlayerWin(int speedOfPlayer) {
         boolean winOrNot;
         if (isGreenLight) winOrNot = true;
-        else if (speedOfPlayer >= MAX_SPEED) winOrNot = false;
+        else if (speedOfPlayer > 0) winOrNot = false;
         else winOrNot = true;
         return winOrNot;
     }
@@ -90,5 +88,4 @@ public class Svetofor {
 
         return winnerPlayerNames;
     }
-
 }
