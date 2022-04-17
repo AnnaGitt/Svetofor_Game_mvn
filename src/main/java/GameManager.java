@@ -25,4 +25,17 @@ public class GameManager {
         }
         return numOfCompletedRounds;
     }
+
+    public int looser(Movable p1, Movable p2, Game game,int rounds){
+        for (int i = 0; i < rounds; i++) {
+            if (!game.isPlayerWin(p1.getSpeed())){
+                return -1;
+            }
+            else if (!game.isPlayerWin(p2.getSpeed())){
+               return 1;
+            }
+        }
+        return 0;
+    }
+
 }
